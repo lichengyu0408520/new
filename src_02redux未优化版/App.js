@@ -5,38 +5,38 @@ import { increment,decrement } from './redux/actions'
 export default class App extends Component{
 
   static propTypes = {
-    count:PropTypes.number.isRequired,
-    increment:PropTypes.func.isRequired,
-    decrement:PropTypes.func.isRequired,
+    store:PropTypes.object.isRequired
   }
 
   increment = () =>{
     const number = this.refs.numberSelect.value*1;
-    this.props.increment(number)
+    //通过store更新状态
+    this.props.store.dispatch(increment(number))
   }
 
   decrement = () =>{
     const number = this.refs.numberSelect.value*1;
-    this.props.decrement(number)
+    this.props.store.dispatch(decrement(number))
     
   }
 
   incrementIfOdd = () =>{
     const number = this.refs.numberSelect.value*1;
-    const count = this.props.count;
+    const count = this.props.store.getState();
     if(count%2===1){
-      this.props.increment(number)
+      this.props.store.dispatch(increment(number))
     }
   }
 
   incrementAsync = () =>{
     const number=this.refs.numberSelect.value*1;
     setTimeout(()=>{
-      this.props.increment(number)
+      this.props.store.dispatch(increment(number))
+      //type是唯一标识
     },1000)
   }
   render(){
-    const count = this.props.count;
+    const count = this.props.store.getState();
     return(
       <div>
         <p>click {count} times</p>

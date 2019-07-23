@@ -1,8 +1,11 @@
+/**
+ * UI组件：负责显示
+ * 在编码上没有使用到任何redux相关的语法
+ */
 import React,{Component} from 'react';
 import PropTypes from 'prop-types'
-import { increment,decrement } from './redux/actions'
 
-export default class App extends Component{
+export default class Counter extends Component{
 
   static propTypes = {
     count:PropTypes.number.isRequired,
